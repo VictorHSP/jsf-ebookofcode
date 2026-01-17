@@ -6,25 +6,25 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-  <include file="/db/changelog/changes/changelog.001_create-table-user.sql" />
-  <include file="/db/changelog/changes/changelog.002_create-table-role.sql" />
-  <include file="/db/changelog/changes/changelog.003_create-table-user_roles.sql" />
-  <include file="/db/changelog/changes/changelog.004_insert-roles.sql" />
-  <include file="/db/changelog/changes/changelog.005_create-table-category.sql" />
-  <include file="/db/changelog/changes/changelog.006_create-table-sub_category.sql" />
-  <include file="/db/changelog/changes/changelog.007_create-table-author.sql" />
-  <include file="/db/changelog/changes/changelog.008_create-table-book.sql" />
-  <include file="/db/changelog/changes/changelog.009_create-table-book-sub-categories.sql" />
-  <include file="/db/changelog/changes/changelog.010_create-table-order.sql" />
-  <include file="/db/changelog/changes/changelog.011_create-table-order-item.sql" />
-  <include file="/db/changelog/changes/changelog.012_create-table-credit-card-order.sql" />
-  <include file="/db/changelog/changes/changelog.013_create-table-pix-order.sql" />
-  <include file="/db/changelog/changes/changelog.014_create-table-book-details.sql" />
-  <include file="/db/changelog/changes/changelog.015_insert-user.sql" />
-  <include file="/db/changelog/changes/changelog.016_insert-user-roles.sql" />
-  <include file="/db/changelog/changes/changelog.017_insert-categories.sql" />
-  <include file="/db/changelog/changes/changelog.018_insert-sub-categories-for-category-programacao.sql" />
-  <include file="/db/changelog/changes/changelog.019_insert-sub-categories-for-category-mobile.sql" />
-  <include file="/db/changelog/changes/changelog.020_insert-sub-categories-for-category-front-end.sql" />
+  <include file="db/changelog/changes/changelog.001_create-table-user.sql" />
+  <include file="db/changelog/changes/changelog.002_create-table-role.sql" />
+  <include file="db/changelog/changes/changelog.003_create-table-user_roles.sql" />
+  <include file="db/changelog/changes/changelog.004_insert-roles.sql" />
+  <include file="db/changelog/changes/changelog.005_create-table-category.sql" />
+  <include file="db/changelog/changes/changelog.006_create-table-sub_category.sql" />
+  <include file="db/changelog/changes/changelog.007_create-table-author.sql" />
+  <include file="db/changelog/changes/changelog.008_create-table-book.sql" />
+  <include file="db/changelog/changes/changelog.009_create-table-book-sub-categories.sql" />
+  <include file="db/changelog/changes/changelog.010_create-table-order.sql" />
+  <include file="db/changelog/changes/changelog.011_create-table-order-item.sql" />
+  <include file="db/changelog/changes/changelog.012_create-table-credit-card-order.sql" />
+  <include file="db/changelog/changes/changelog.013_create-table-pix-order.sql" />
+  <include file="db/changelog/changes/changelog.014_create-table-book-details.sql" />
+  <include file="db/changelog/changes/changelog.015_insert-user.sql" />
+  <include file="db/changelog/changes/changelog.016_insert-user-roles.sql" />
+  <include file="db/changelog/changes/changelog.017_insert-categories.sql" />
+  <include file="db/changelog/changes/changelog.018_insert-sub-categories-for-category-programacao.sql" />
+  <include file="db/changelog/changes/changelog.019_insert-sub-categories-for-category-mobile.sql" />
+  <include file="db/changelog/changes/changelog.020_insert-sub-categories-for-category-front-end.sql" />
 
 </databaseChangeLog>
