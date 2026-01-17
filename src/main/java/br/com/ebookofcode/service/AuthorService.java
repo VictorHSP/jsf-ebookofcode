@@ -5,10 +5,14 @@ import br.com.ebookofcode.repository.AuthorRepository;
 import br.com.ebookofcode.service.exceptions.AuthorAlreadyExistsException;
 import br.com.ebookofcode.service.exceptions.ErrorCodeEnum;
 import br.com.ebookofcode.utils.S3Utils;
+import br.com.ebookofcode.view.backoffice.author.AuthorBean;
 import br.com.ebookofcode.view.dto.FileUploadDTO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,6 +21,8 @@ public class AuthorService implements Serializable {
 
   @Inject
   private AuthorRepository authorRepository;
+
+  private final Logger logger = LoggerFactory.getLogger(AuthorService.class);
 
   private static final String FOLDER_AUTHOR_PHOTO = "author-photo";
 
@@ -31,7 +37,7 @@ public class AuthorService implements Serializable {
     if (fileUpload != null && fileUpload.size() > 0
         && fileUpload.fileName() != null && !fileUpload.fileName().equals(author.getUrlPhoto()) ) {
       var s3url = S3Utils.uploadFile(fileUpload, FOLDER_AUTHOR_PHOTO, author.getEmail());
-      System.out.println(S3Utils.generatePreSignedUrl(s3url));
+      logger.info("Photo uploaded to S3: {}", S3Utils.generatePreSignedUrl(s3url));
       author.setUrlPhoto(s3url);
     }
 

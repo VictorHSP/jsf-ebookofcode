@@ -38,24 +38,29 @@ public class AuthorBean extends BaseBean implements RequestFilter {
   }
 
   public void loadPageableAuthors(int page, int pageSize) {
+    logger.info("Executing loadPageableAuthors with page: {} and pageSize: {}", page, pageSize);
     authors = authorService.findAuthorsPageable(page, pageSize);
   }
 
   public void nextPage() {
+    logger.info("Executing nextPage with page: {} and pageSize: {}", page, pageSize);
     page++;
     loadPageableAuthors(this.page, this.pageSize);
   }
 
   public void previousPage() {
+    logger.info("Executing previousPage with page: {} and pageSize: {}", page, pageSize);
     if (page > 0) page--;
     loadPageableAuthors(this.page, this.pageSize);
   }
 
   public boolean isFirstPage() {
+    logger.info("Executing isFirstPage with page: {}", page);
     return page == 0;
   }
 
   public boolean isLastPage() {
+    logger.info("Executing isLastPage with page: {} and totalAuthors: {} and pageSize: {}", page, totalAuthors, pageSize);
     return (page + 1L) * pageSize >= totalAuthors;
   }
 
@@ -64,7 +69,7 @@ public class AuthorBean extends BaseBean implements RequestFilter {
   }
 
   public void searchByEmail() {
-    System.out.println("searchByEmail");
+    logger.info("searchByEmail with email: {}", emailSearch);
   }
 
   public String getEmailSearch() {
