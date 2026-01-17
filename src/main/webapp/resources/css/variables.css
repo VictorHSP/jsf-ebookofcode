@@ -16,6 +16,11 @@
   --crl-btn-default-green: #2e8b57;
   --crl-btn-default-green-hover: #1a6244;
 
+  /* Form and Alert Colors */
+  --clr-error: #f44336;
+  --clr-save: #ea525f;
+  --clr-focus-shadow: #a6d5fa;
+
   /* Border Radius */
   --border-radius: 0.2rem;
   --radius: 1rem;
