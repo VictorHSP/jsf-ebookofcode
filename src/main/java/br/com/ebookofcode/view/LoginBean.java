@@ -27,11 +27,11 @@ public class LoginBean implements Serializable {
     var request      = (HttpServletRequest) facesContext.getExternalContext().getRequest();
     var response     = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 
-    var httpAuthentication = securityContext.authenticate(request, response,
+    var authenticationStatus = securityContext.authenticate(request, response,
         AuthenticationParameters.withParams()
             .credential(new UsernamePasswordCredential(getUsername(), getPassword())));
 
-    return switch (httpAuthentication) {
+    return switch (authenticationStatus) {
       case SEND_CONTINUE -> {
         facesContext.responseComplete();
         yield null;
