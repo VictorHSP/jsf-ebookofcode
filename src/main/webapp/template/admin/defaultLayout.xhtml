@@ -17,12 +17,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
     <h:outputStylesheet library="css" name="variables.css"/>
+    <h:outputStylesheet library="css" name="base.css"/>
     <h:outputStylesheet library="css" name="admin/layout.css"/>
     <h:outputStylesheet library="css" name="admin/grid.css"/>
 
     <!-- Favicon -->
     <link rel="icon" href="#{resource['img/logo.png']}" type="image/x-icon" />
     <link rel="shortcut icon" href="#{resource['img/logo.png']}" type="image/x-icon" />
+    <h:outputScript library="js" name="admin/layout.js" />
 </h:head>
 
 <h:body>
@@ -33,6 +35,15 @@
 
     <div class="content">
         <ui:insert name="content" />
+    </div>
+
+    <div id="loading-overlay" class="hide">
+        <div id="loading-overlay-content">
+            <i class="fas fa-spinner fa-spin fa-3x" style="color: white; margin-bottom: 1rem"></i>
+            <p id="loading-text" style="color: white; font-weight: bold;">
+                <h:outputText value="Processando..."/>
+            </p>
+        </div>
     </div>
 
     <ui:insert name="footer">

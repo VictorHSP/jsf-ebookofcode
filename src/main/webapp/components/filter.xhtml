@@ -4,12 +4,6 @@
               xmlns:h="jakarta.faces.html"
               xmlns:f="jakarta.faces.core">
 
-   <script>
-      function toggleSidebar() {
-         const sidebar = document.getElementById('sidebar');
-         sidebar.classList.toggle('open');
-      }
-   </script>
    <h:outputStylesheet library="css" name="admin/filter.css" />
 
    <aside class="sidebar" id="sidebar">
@@ -25,7 +19,7 @@
 
             <div class="form-field full-width">
                <h:outputLabel value="ID" for="id"/>
-               <h:inputText id="id" autocomplete="off" value="#{filterBean.filter.id}"  >
+               <h:inputText id="id" autocomplete="off" type="number" value="#{filterBean.filter.id}"  >
                   <f:convertNumber integerOnly="true" />
                </h:inputText>
                <h:message for="id" styleClass="form-field-message"/>
