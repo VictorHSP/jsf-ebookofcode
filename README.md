@@ -1,4 +1,4 @@
-# 📚 Livraria Digital - eBooks of Code
+# 📚 Digital Bookstore - eBooks of Code
 
 ![Java](https://img.shields.io/badge/Java-21-007396?logo=java)
 ![Jakarta EE](https://img.shields.io/badge/JakartaEE-10-orange?logo=jakartaee)
@@ -13,26 +13,28 @@
 
 ---
 
-## ✨ Sobre o Projeto
+## ✨ About the Project
 
-Este projeto é uma simulação de uma livraria digital especializada em **eBooks para programação**, construída com as tecnologias mais modernas do ecossistema Java.
+This project is a simulation of a digital bookstore specialized in **programming eBooks**, built with the most modern technologies of the Java ecosystem.
 
-A aplicação é dividida em duas áreas principais:
+The application is divided into two main areas:
 
-- **🏬 Vitrine Pública:** onde os usuários podem visualizar os eBooks disponíveis.
-- **🛠 Back Office (Administração):** onde administradores podem gerenciar:
-    - Autores
-    - Livros
-    - Categorias
-    - Vendas
-    - Usuários
-    - Relatorios
+- **🏬 Public Storefront:** where users can view available eBooks.
+- **🛠 Back Office (Administration):** where administrators can manage:
+    - Authors
+    - Books
+    - Categories
+    - Sales
+    - Users
+    - Reports
 
-## 🔧 Tecnologias Utilizadas
+## 🔧 Technologies Used
 
 - **Java 21**
 - **Jakarta EE 10**
 - **Jakarta Faces (JSF) 4.1**
+- **JavaScript (Vanilla)**: Scripts consolidados para controle de overlay, alertas e navegação.
+- **CSS3**: Uso de variáveis (Custom Properties) e estilos unificados.
 - **OmniFaces**
 - **JPA**
 - **PostgreSQL**
@@ -41,33 +43,41 @@ A aplicação é dividida em duas áreas principais:
 - **Maven**
 - **Docker Compose**
 
-## 🐳 Ambiente de Desenvolvimento
+## 🐳 Development Environment
 
-Para facilitar a execução local, utilizamos o `docker-compose` para subir os seguintes serviços:
+To facilitate local execution, we use `docker-compose` to spin up the following services:
 
-- **PostgreSQL** (Banco de dados)
-- **LocalStack** (Simulação do AWS S3)
+- **PostgreSQL** (Database)
+- **LocalStack** (AWS S3 simulation)
 
-### ▶️ Como executar
+### ▶️ How to run
 
-1. **Clone o repositório**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/VictorHSP/jsf-ebookofcode.git
    cd jsf-ebookofcode
    ```
-2. **Suba os serviços com Docker Compose**
+2. **Start services with Docker Compose**
    ```bash
    cd docker/
    docker-compose up -d
    ```
 
-3. **Crie o Bucket S3 no LocalStack**
+3. **Database Management (Liquibase)**
+   This project uses Liquibase for database schema versioning.
+   
+   To apply database changes (ensure PostgreSQL is running via Docker):
+   ```bash
+   mvn liquibase:update
+   ```
+
+4. **Create S3 Bucket in LocalStack**
    ```bash
    cd localstack/
    /bin/bash init.sh
    ```
 
-4. **Configure WildFly local em uma pasta de servidores**
+5. **Configure local WildFly in a servers folder**
    ```bash
    mkdir wildfly_35/
    cd wildfly_35/
@@ -82,7 +92,7 @@ Para facilitar a execução local, utilizamos o `docker-compose` para subir os s
    rm wildfly-35.0.1.Final.tar.gz
    
    echo Getting standalone.xml...
-   git clone git@github.com:VictorHSP/jsf-ebookofcode.git
+   git clone https://github.com/VictorHSP/jsf-ebookofcode.git
    cd jsf-ebookofcode/
    cd ..
    cp -r jsf-ebookofcode/standalone/standalone.xml wildfly-35.0.1.Final/standalone/configuration
@@ -97,53 +107,67 @@ Para facilitar a execução local, utilizamos o `docker-compose` para subir os s
    echo Finished!!
    ```
 
-5. **Desabilitando JASPI Security Domain**
+6. **Disabling JASPI Security Domain**
 
-    1. Necessario para funcionar o `@CustomFormAuthenticationMechanismDefinition`. Desta forma
-    a aplicacao reconhece as roles definidas `ADMIN` e `CUSTOMER` e conclui com sucesso a autenticacao e autorizacao.
+    1. Required for `@CustomFormAuthenticationMechanismDefinition` to work. This way
+    the application recognizes the defined roles `ADMIN` and `CUSTOMER` and successfully completes authentication and authorization.
    
-    2. Criando um novo usuario admin no WildFly:
+    2. Creating a new admin user in WildFly:
     ```bash
     cd wildfly-35.0.1.Final/bin
     /bin/bash add-user.sh
     ```
      ![add-user-example.png](doc/add-user-example.png)   
 
-    3. Depois de criar o usuario, necessario inciar o servidor e entrar na url `http://localhost:9990/console/index.html`.
+    3. After creating the user, start the server and access the URL `http://localhost:9990/console/index.html`.
     ```bash
     cd wildfly-35.0.1.Final/bin
     /bin/bash standalone.sh
     ```
-   Logue com seu username e password configurados no passo anterior. Va em `configuration -> Subsystems -> Web -> Application Security Domain -> Other (View)` Clique em `Edit`.
+   Log in with your username and password configured in the previous step. Go to `configuration -> Subsystems -> Web -> Application Security Domain -> Other (View)` Click `Edit`.
    
-   4. Desabilite a opcao `Integrated JASPI`
+   4. Disable the `Integrated JASPI` option
     ![integrated-jaspi-off.png](doc/integrated-jaspi-off.png)
     
 
-## 📁 Estrutura de Pastas
+## 🛠 Useful Commands
+
+### Liquibase
+Liquibase is used to manage database migrations.
+- **Update database:** `mvn liquibase:update`
+- **Check status:** `mvn liquibase:status`
+
+### Docker
+- **Start services:** `docker-compose up -d`
+- **Stop services:** `docker-compose down`
+
+### LocalStack (S3)
+- **Initialize bucket:** `./localstack/init.sh`
+
+## 📁 Folder Structure
 ```
 jsf-ebookofcode/
 │
 ├── src/
 │   ├── main/
-│   │   ├── java/         # Código fonte (JPA, Beans, Serviços)
-│   │   ├── resources/    # Arquivos de configuração
-│   │   └── webapp/       # Páginas JSF
+│   │   ├── java/         # Source code (JPA, Beans, Services)
+│   │   ├── resources/    # Configuration files
+│   │   └── webapp/       # JSF Pages
 │
 ├── docker/
-│   ├── docker-compose.yml # Docker comose com os servicos do PostgreSQL e LocalStack
+│   ├── docker-compose.yml # Docker compose with PostgreSQL and LocalStack services
 ├── localstack/
-│   ├── init.sh            # Criar do bucker S3 local
+│   ├── init.sh            # Local S3 bucket creation
 ├── standalone/
-│   ├── standalone.xml     # Standalone configurado com o datasource apontando para banco local
+│   ├── standalone.xml     # Standalone configured with datasource pointing to local DB
 │
 ├── pom.xml
 └── README.md
 ```
-## ☁️ Integração com S3
-A simulação de uploads e downloads de arquivos (como capas dos livros ou PDFs) 
-é feita via **LocalStack**, que emula a AWS S3 localmente.
+## ☁️ S3 Integration
+The simulation of file uploads and downloads (such as book covers or PDFs) 
+is done via **LocalStack**, which emulates AWS S3 locally.
 
 <hr>
 
-Desenvolvido com 💻 por @victorhsp
+Developed with 💻 by @victorhsp

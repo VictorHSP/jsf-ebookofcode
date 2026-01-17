@@ -4,42 +4,57 @@
   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
   version="6.0">
 
+  <!-- Define the welcome files list. When a user accesses the root directory (/), 
+       the server looks for these files in the defined order. -->
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
 
+  <!-- Global context parameters accessible to the entire Faces application. -->
+  
+  <!-- PROJECT_STAGE: Defines the project stage. 'Development' enables detailed error messages 
+       and debugging tools. Change to 'Production' in a real environment. -->
   <context-param>
     <param-name>jakarta.faces.PROJECT_STAGE</param-name>
     <param-value>Development</param-value>
   </context-param>
 
+  <!-- FACELETS_REFRESH_PERIOD: Defines the time (in seconds) to reload XHTML pages.
+       The value '0' is ideal for development, as it reflects changes instantly. -->
   <context-param>
     <param-name>jakarta.faces.FACELETS_REFRESH_PERIOD</param-name>
     <param-value>0</param-value>
   </context-param>
 
+  <!-- VALIDATE_EMPTY_FIELDS: When 'true', forces Faces to execute validators even on empty fields. -->
   <context-param>
     <param-name>jakarta.faces.VALIDATE_EMPTY_FIELDS</param-name>
     <param-value>true</param-value>
   </context-param>
 
+  <!-- CONFIG_FILES: Indicates the location of additional Faces configuration files. -->
   <context-param>
     <param-name>jakarta.faces.CONFIG_FILES</param-name>
     <param-value>/faces-config.xml</param-value>
   </context-param>
 
+  <!-- Configuration of the Faces Servlet, which is the main engine of Jakarta Faces. -->
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+    <!-- Indicates that the servlet should be loaded and initialized on server startup (priority 1). -->
     <load-on-startup>1</load-on-startup>
   </servlet>
 
+  <!-- URL Mapping for the Faces Servlet. 
+       This servlet will process all requests ending in .xhtml. -->
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
 
 
+  <!-- Declaration of security roles used by the application. -->
   <security-role>
     <role-name>ADMIN</role-name>
   </security-role>
@@ -48,17 +63,21 @@
     <role-name>CUSTOMER</role-name>
   </security-role>
 
+  <!-- Security constraint for the Admin Area. -->
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>Admin Area</web-resource-name>
+      <!-- Defines the protected URL pattern. -->
       <url-pattern>/admin/*</url-pattern>
     </web-resource-collection>
 
+    <!-- Defines which roles have permission to access this resource. -->
     <auth-constraint>
       <role-name>ADMIN</role-name>
     </auth-constraint>
   </security-constraint>
 
+  <!-- Security constraint for the Customer Area. -->
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>Customer Area</web-resource-name>
