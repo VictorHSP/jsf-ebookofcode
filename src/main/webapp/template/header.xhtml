@@ -28,11 +28,11 @@
                                 <ui:fragment rendered="#{not empty category.subCategories}">
                                     <ul class="nav_list_item_drop">
                                         <ui:repeat value="#{category.subCategories}" var="subCategory">
-                                            <li>
-                                                <h:link outcome="/library/search.xhtml?subCategory=#{subCategory.id}">
+                                            <h:link outcome="/library/search.xhtml?subCategory=#{subCategory.id}">
+                                                <li>
                                                     <h:outputText value="#{subCategory.name}" />
-                                                </h:link>
-                                            </li>
+                                                </li>
+                                            </h:link>
                                         </ui:repeat>
                                     </ul>
                                 </ui:fragment>
