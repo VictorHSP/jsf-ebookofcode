@@ -9,7 +9,7 @@
 ![Wildfly](https://img.shields.io/badge/Wildfly-35-darkblue?logo=wildfly)
 ![Maven](https://img.shields.io/badge/Maven-Build+Tool-C71A36?logo=apachemaven)
 ![Docker Compose](https://img.shields.io/badge/Docker-darkblue?logo=docker)
-![S3](https://img.shields.io/badge/AWS%20S3-LocalStack-orange?logo=amazonaws)
+![S3](https://img.shields.io/badge/AWS%20S3-Ministack-orange?logo=amazonaws)
 
 ---
 
@@ -39,7 +39,7 @@ The application is divided into two main areas:
 - **JPA**
 - **PostgreSQL**
 - **Wildfly 35**
-- **Amazon S3 (via LocalStack)**
+- **Amazon S3 (via Ministack)**
 - **Maven**
 - **Docker Compose**
 
@@ -48,7 +48,7 @@ The application is divided into two main areas:
 To facilitate local execution, we use `docker-compose` to spin up the following services:
 
 - **PostgreSQL** (Database)
-- **LocalStack** (AWS S3 simulation)
+- **Ministack** (AWS S3 simulation)
 
 ### ▶️ How to run
 
@@ -71,9 +71,9 @@ To facilitate local execution, we use `docker-compose` to spin up the following 
    mvn liquibase:update
    ```
 
-4. **Create S3 Bucket in LocalStack**
+4. **Create S3 Bucket in Ministack**
    ```bash
-   cd localstack/
+   cd ministack/
    /bin/bash init.sh
    ```
 
@@ -141,8 +141,8 @@ Liquibase is used to manage database migrations.
 - **Start services:** `docker-compose up -d`
 - **Stop services:** `docker-compose down`
 
-### LocalStack (S3)
-- **Initialize bucket:** `./localstack/init.sh`
+### Ministack (S3)
+- **Initialize bucket:** `./ministack/init.sh`
 
 ## 📁 Folder Structure
 ```
@@ -155,8 +155,8 @@ jsf-ebookofcode/
 │   │   └── webapp/       # JSF Pages
 │
 ├── docker/
-│   ├── docker-compose.yml # Docker compose with PostgreSQL and LocalStack services
-├── localstack/
+│   ├── docker-compose.yml # Docker compose with PostgreSQL and Ministack services
+├── ministack/
 │   ├── init.sh            # Local S3 bucket creation
 ├── standalone/
 │   ├── standalone.xml     # Standalone configured with datasource pointing to local DB
@@ -166,7 +166,7 @@ jsf-ebookofcode/
 ```
 ## ☁️ S3 Integration
 The simulation of file uploads and downloads (such as book covers or PDFs) 
-is done via **LocalStack**, which emulates AWS S3 locally.
+is done via **Ministack**, which emulates AWS S3 locally.
 
 <hr>
 
