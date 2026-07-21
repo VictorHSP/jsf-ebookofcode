@@ -20,7 +20,10 @@ services:
       - "4566:4566"
     environment:
       - LOG_LEVEL=INFO
-      - S3_PERSIST=0
+      - S3_PERSIST=1
+      - PERSIST_STATE=1
     volumes:
       - ./data/s3:/tmp/ministack-data/s3
+      - ./data/state:/tmp/ministack-state
+      - ../ministack/init.sh:/docker-entrypoint-initaws.d/init.sh
       - /var/run/docker.sock:/var/run/docker.sock
