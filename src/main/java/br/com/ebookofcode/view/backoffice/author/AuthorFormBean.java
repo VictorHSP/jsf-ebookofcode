@@ -71,11 +71,14 @@ public class AuthorFormBean extends BaseBean {
         return;
       }
 
-      var photoSaved = authorService.findAuthorPhotoOnS3(author.getUrlPhoto());
-      previewPhoto = photoSaved.photo();
-      contentType = photoSaved.contentType();
-      previewPhotoFileName = photoSaved.fileName();
-      size = photoSaved.size();
+      if (author.getUrlPhoto() != null) {
+        var photoSaved = authorService.findAuthorPhotoOnS3(author.getUrlPhoto());
+        previewPhoto = photoSaved.photo();
+        contentType = photoSaved.contentType();
+        previewPhotoFileName = photoSaved.fileName();
+        size = photoSaved.size();
+      }
+
       setAuthor(author);
     }
   }
