@@ -1,3 +1,39 @@
 @charset "utf-8";
 
-/* Estilos específicos da página pública podem ser adicionados aqui */
+/* ===========================================================================
+ * Vitrine pública
+ * ======================================================================== */
+.content > h1 {
+  margin-bottom: var(--space-5);
+}
+
+/* Botões da área pública sem styleClass (ex.: Logout) */
+.content form input[type="submit"],
+.content form button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.65rem 1.4rem;
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--brand-500);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: background-color var(--t-base), transform var(--t-fast), box-shadow var(--t-base);
+}
+
+.content form input[type="submit"]:hover,
+.content form button:hover {
+  background-color: var(--brand-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.content form input[type="submit"]:active,
+.content form button:active {
+  transform: translateY(0);
+}

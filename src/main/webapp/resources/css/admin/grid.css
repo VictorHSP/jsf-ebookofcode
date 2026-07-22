@@ -1,8 +1,13 @@
+@charset "utf-8";
+
+/* ===========================================================================
+ * Dashboard do backoffice — grade de cards
+ * ======================================================================== */
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+  padding: var(--space-2) 0;
 }
 
 .container a {
@@ -11,47 +16,75 @@
 }
 
 .box {
-  background-color: #fff;
-  border: 1px solid var(--clr-gray700);
-  padding: 20px;
-  text-align: center;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
-  transition: border 200ms ease,
-  color 200ms ease;
-
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--space-3);
+  min-height: 200px;
+  padding: var(--space-6) var(--space-5);
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand-500), var(--clr-primary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base);
+}
+
+.box img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  transition: transform var(--t-base);
 }
 
 .box-title {
-  margin-top: 1.5rem;
-  font-weight: 600;
-  font-size: large;
+  margin-top: var(--space-2);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  color: var(--brand-900);
+  transition: color var(--t-base);
 }
 
 .box:hover {
-  border: 1px solid #2f915b;
-  box-shadow: 0 5px 5px rgb(20, 58, 28, 0.3);
-  color: #2f915b;
+  transform: translateY(-4px);
+  border-color: var(--brand-400);
+  box-shadow: var(--shadow-lg);
 }
 
-@media (max-width: 1200px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.box:hover::before {
+  transform: scaleX(1);
 }
 
-@media (max-width: 992px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.box:hover img {
+  transform: scale(1.08);
+}
+
+.box:hover .box-title {
+  color: var(--brand-600);
 }
 
 @media (max-width: 600px) {
   .container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .box {
+    min-height: 160px;
+    padding: var(--space-5) var(--space-3);
   }
 }
