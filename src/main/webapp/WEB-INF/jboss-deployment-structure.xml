@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <!-- Allows the application to access JDK networking extensions used by Apache HttpClient 5 -->
+            <module name="jdk.net" />
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
