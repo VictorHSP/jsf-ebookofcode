@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -55,7 +56,13 @@ public class AuthorService implements Serializable {
   }
 
   public FileUploadDTO findAuthorPhotoOnS3(String urlPhoto) {
-    return S3Utils.downloadPhoto(urlPhoto);
+      try {
+          return S3Utils.downloadPhoto(urlPhoto);
+      } catch (IOException e) {
+          logger.error("Failed to download author photo from S3. URL: {}", urlPhoto, e);
+      }
+
+      return null;
   }
 
   public Long countTotalAuthors() {

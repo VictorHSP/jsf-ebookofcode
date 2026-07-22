@@ -5,7 +5,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
@@ -18,6 +17,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3Configuration;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
@@ -78,7 +78,7 @@ public class S3Utils {
     return presignedUrl.toString();
   }
 
-  public static FileUploadDTO downloadPhoto(final String key) {
+  public static FileUploadDTO downloadPhoto(final String key) throws IOException {
     try (S3Client s3Client = buildS3Client()) {
 
       GetObjectRequest request = GetObjectRequest.builder()
@@ -98,8 +98,8 @@ public class S3Utils {
           metadata.contentType(),
           metadata.contentLength()
       );
-    } catch (IOException e) {
-      throw new UncheckedIOException("Failed to read file from S3", e);
+    } catch (IOException | NoSuchKeyException e) {
+      throw new IOException(String.format("Failed to read file from S3. Key: %s", key), e);
     }
   }
 
