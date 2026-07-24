@@ -27,4 +27,8 @@ public class MenuCategoryBean implements Serializable {
   public List<Category> getCategories() {
     return categories;
   }
+
+  public String getCurrentYear() {
+    return String.valueOf(java.time.Year.now().getValue());
+  }
 }
