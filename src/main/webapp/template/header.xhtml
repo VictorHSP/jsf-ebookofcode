@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
-                xmlns:ui="jakarta.faces.facelets">
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:ec="jakarta.faces.composite/components">
     <header>
         <h:form>
             <div>
@@ -38,6 +39,8 @@
                                 </ui:fragment>
                             </li>
                         </ui:repeat>
+
+                        <ec:userStatus />
                     </ul>
                 </nav>
             </div>
