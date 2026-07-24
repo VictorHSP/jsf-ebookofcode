@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.time.Duration;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -34,7 +35,7 @@ public class S3Utils {
       String key = folder
           .concat(FOLDER_PATH)
           .concat(fileUpload.fileName())
-          .concat(SEPARATOR).concat(email);
+          .concat(SEPARATOR).concat(RandomGeneratorUtils.generateBase64());
 
       PutObjectRequest putRequest = PutObjectRequest.builder()
           .bucket(BUCKET_NAME)
@@ -79,17 +80,17 @@ public class S3Utils {
   }
 
   public static FileUploadDTO downloadPhoto(final String key) throws IOException {
-    try (S3Client s3Client = buildS3Client()) {
-
       GetObjectRequest request = GetObjectRequest.builder()
           .bucket(BUCKET_NAME)
           .key(key)
           .build();
 
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(request);
-      s3Object.transferTo(baos);
+    try (S3Client s3Client = buildS3Client();
+         ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(request)) {
 
+
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      s3Object.transferTo(baos);
       GetObjectResponse metadata = s3Object.response();
 
       return new FileUploadDTO(
