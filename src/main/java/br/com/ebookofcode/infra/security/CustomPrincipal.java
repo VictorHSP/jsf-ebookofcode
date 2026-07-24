@@ -21,4 +21,7 @@ public class CustomPrincipal extends CallerPrincipal {
     return user.getEmail();
   }
 
+  public User getUser() {
+    return user;
+  }
 }

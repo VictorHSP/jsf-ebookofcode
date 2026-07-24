@@ -1,83 +1,71 @@
-/* Sidebar */
+@charset "utf-8";
+
+/* ===========================================================================
+ * Sidebar de filtros (deslizante — classe .open controlada pelo JS)
+ * As regras de .form-field vivem em admin/layout.css (sem duplicação aqui).
+ * ======================================================================== */
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: #fffafa;
-    border-left: 1px solid var(--clr-gray300);
-    box-shadow: 4px 4px 4px rgba(0,0,0, 1);
-    padding: 20px;
-    transition: right 0.3s ease;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 90vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: -12px 0 32px rgba(22, 29, 52, 0.18);
+  padding: var(--space-5) var(--space-5) 0;
+  transform: translateX(100%);
+  transition: transform var(--t-base);
+  z-index: 1000;
 }
 
 .sidebar.open {
-    right: 0;
+  transform: translateX(0);
+}
+
+.sidebar > .fa-times {
+  align-self: flex-end;
+  color: var(--text-muted) !important;
+  font-size: 1.35rem !important;
+  margin: 0 0 var(--space-2) !important;
+  transition: color var(--t-fast);
+}
+
+.sidebar > .fa-times:hover {
+  color: var(--accent-500) !important;
 }
 
 .sidebar h2 {
-    margin-bottom: 20px;
-    color: var(--clr-gray700);
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-xl);
+  color: var(--brand-900);
+}
+
+.sidebar hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-bottom: var(--space-5);
 }
 
 .form-filter {
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - 60px);
-    margin: 2rem 0
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin: 0;
 }
 
+/* Botão aplicar filtros — largura total, fixado ao fim da sidebar */
 .btn-filter {
-    font-size: larger;
-    padding: 1rem 2.5rem;
-    background-color: #2196f3;
+  width: 100%;
+  margin-top: var(--space-4);
+  padding: 0.85rem 1.5rem;
+  font-size: var(--fs-base);
+  background-color: var(--brand-500) !important;
 }
 
 .btn-filter:hover {
-    background-color: #4682b4;
-}
-
-.form-field-message {
-    position: absolute;
-    bottom: -1.4rem;
-    left: 0;
-    font-size: 0.9rem;
-    color: #f44336;
-}
-
-.form-field.full-width {
-    flex: 1 1 100%;
-}
-
-.form-field label {
-    margin-bottom: 4px;
-    font-weight: bold;
-}
-
-.form-field input[type="text"],
-.form-field select,
-.form-field textarea {
-    height: 100%;
-    font-family: inherit;
-    font-weight: inherit;
-    outline: none;
-    padding: 0.5rem;
-    border: 1px solid var(--clr-gray400);
-    border-radius: 4px;
-    transition: border-color 200ms ease-in;
-}
-
-.form-field input[type="text"]:hover,
-.form-field select:hover,
-.form-field textarea:hover {
-    border-color: var(--clr-primary);
-}
-
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
-    border-color: var(--clr-primary-dark);
-    box-shadow: 1px 1px 1px 0 #a6d5fa;
+  background-color: var(--brand-600) !important;
 }

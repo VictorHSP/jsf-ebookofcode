@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+
+      xmlns:cc="jakarta.faces.composite">
+
+<cc:interface>
+
+</cc:interface>
+
+<cc:implementation>
+    <li class="nav_list_item user_status_item">
+        <ui:fragment rendered="#{not currentUserBean.loggedIn}">
+            <h:link outcome="/login.xhtml" styleClass="login_button">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </h:link>
+        </ui:fragment>
+
+        <ui:fragment rendered="#{currentUserBean.loggedIn}">
+            <div class="user_menu_wrapper">
+                <span class="user_name">
+                    <i class="fas fa-user-circle"></i> Hi, #{currentUserBean.info.name}!
+                    <i class="fas fa-chevron-down"></i>
+                </span>
+
+                <ul class="nav_list_item_drop user_dropdown">
+                    <ui:fragment rendered="#{currentUserBean.admin}">
+                        <h:link outcome="/admin/index.xhtml">
+                            <li>
+                                <i class="fas fa-tachometer-alt"></i> Dashboard Admin
+                            </li>
+                        </h:link>
+                    </ui:fragment>
+                    <h:commandLink action="#{loginBean.logout()}">
+                        <li>
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </li>
+                    </h:commandLink>
+                </ul>
+            </div>
+        </ui:fragment>
+    </li>
+</cc:implementation>
+
+</html>

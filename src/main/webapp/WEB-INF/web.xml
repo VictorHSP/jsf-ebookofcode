@@ -54,6 +54,14 @@
   </servlet-mapping>
 
 
+  <!-- Handles stale JSF views (e.g. clicking "back" after logout and resubmitting
+       a form whose session/view state no longer exists). Instead of a FATAL
+       ViewExpiredException, the user is sent back to the login page. -->
+  <error-page>
+    <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+    <location>/login.xhtml</location>
+  </error-page>
+
   <!-- Declaration of security roles used by the application. -->
   <security-role>
     <role-name>ADMIN</role-name>

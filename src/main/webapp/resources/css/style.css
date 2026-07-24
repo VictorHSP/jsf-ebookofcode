@@ -1,3 +1,101 @@
 @charset "utf-8";
 
-/* Estilos específicos da página pública podem ser adicionados aqui */
+/* ===========================================================================
+ * Vitrine pública
+ * ======================================================================== */
+.content > h1 {
+  margin-bottom: var(--space-5);
+}
+
+/* Botões da área pública sem styleClass (ex.: Logout) */
+.content form input[type="submit"],
+.content form button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.65rem 1.4rem;
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--brand-500);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: background-color var(--t-base), transform var(--t-fast), box-shadow var(--t-base);
+}
+
+.content form input[type="submit"]:hover,
+.content form button:hover {
+  background-color: var(--brand-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.content form input[type="submit"]:active,
+.content form button:active {
+  transform: translateY(0);
+}
+
+/* ===========================================================================
+ * User Status Component
+ * ======================================================================== */
+.user_status_item {
+    margin-left: auto; /* Push to the right */
+    display: flex;
+    align-items: center;
+}
+
+.user_menu_wrapper {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.user_name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.user_name i.fa-chevron-down {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-left: var(--space-1);
+}
+
+/* Reusing .nav_list_item_drop logic from base.css */
+.user_menu_wrapper:hover .user_dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user_dropdown {
+    right: 0;
+    left: auto; /* Align to right since we are on the right side */
+    min-width: 12rem;
+    margin-top: var(--space-3);
+}
+
+.user_dropdown li i {
+    width: 1.2rem;
+    opacity: 0.8;
+}
+
+.login_button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-sm);
+    transition: all var(--t-base);
+}
+
+.login_button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #fff;
+}

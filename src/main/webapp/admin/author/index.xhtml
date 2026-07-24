@@ -35,12 +35,12 @@
         </ui:include>
 
         <h:form>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h:button value="Novo Autor" title="Novo Autor"
-                              styleClass="btn-default"
-                              outcome="/admin/author/newAuthor.xhtml?faces-redirect=true"/>
+            <div class="toolbar">
+                <h:button value="Novo Autor" title="Novo Autor"
+                          styleClass="btn-default"
+                          outcome="/admin/author/newAuthor.xhtml?faces-redirect=true"/>
 
-                <div style="display: flex; align-items: center; gap: 0.5rem; margin-right: 2rem">
+                <div class="toolbar-actions">
                     <button type="button" class="export" title="Exportar" onclick="document.getElementById('btnJSFAction').click()">
                         <i class="fas fa-file-export"/> Exportar
                     </button>
@@ -50,8 +50,8 @@
                 </div>
             </div>
 
-            <h:panelGroup id="dataTableAuthors">
-                <h:dataTable value="#{authorBean.authors}" var="author" border="1" width="85%">
+            <h:panelGroup id="dataTableAuthors" layout="block" styleClass="table-wrap">
+                <h:dataTable value="#{authorBean.authors}" var="author" styleClass="data-table">
 
                     <h:column>
                         <f:facet name="header">ID</f:facet>

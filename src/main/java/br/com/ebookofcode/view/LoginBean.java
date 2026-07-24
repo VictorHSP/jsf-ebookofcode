@@ -1,5 +1,7 @@
 package br.com.ebookofcode.view;
 
+import br.com.ebookofcode.infra.security.CustomPrincipal;
+import br.com.ebookofcode.vo.RolesEnum;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -40,6 +42,20 @@ public class LoginBean implements Serializable {
       case SEND_FAILURE -> "login.xhtml?error=true";
       default -> null;
     };
+  }
+
+  public String checkAlreadyLoggedIn() {
+    var principal = securityContext.getCallerPrincipal();
+
+    if (!(principal instanceof CustomPrincipal)) {
+      return null;
+    }
+
+    if (securityContext.isCallerInRole(RolesEnum.ADMIN.name())) {
+      return "/admin/index.xhtml?faces-redirect=true";
+    }
+
+    return "/customer/index.xhtml?faces-redirect=true";
   }
 
   public String logout() throws ServletException {
